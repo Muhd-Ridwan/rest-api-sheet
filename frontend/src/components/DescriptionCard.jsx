@@ -1,3 +1,4 @@
+// Testing cloudflare pipeline
 const METHOD_COLOR = {
   GET: "#58A6FF",
   POST: "#3FB950",

@@ -8,7 +8,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://rest-cheat.dev-r.org"],
+    allow_origins=["http://localhost:5173", "https://racs.dev-r.org"],
     allow_methods=["*"],
     allow_headers=["*"]
 )

@@ -1,6 +1,17 @@
 # REST API Demo
 
+`Self Learning, Curiosity`<br>
 An interactive full-stack demo for presenting REST API concepts. Users can fire live HTTP requests from the browser and see real responses — built for a live presentation to show GET, POST, PUT, PATCH, and DELETE in action.
+I built this because also want to learn on how to hosted it in VPS by using docker. <br>
+It's live but I stopped the backend service. Ping me if want to try it on prod.<br>
+Visit Here &rarr; ```https://racs.dev-r.org```
+
+
+<img width="1466" height="798" alt="image" src="https://github.com/user-attachments/assets/2d59f7e9-f393-43fe-97b5-28ca1de87209" />
+<img width="1469" height="803" alt="image" src="https://github.com/user-attachments/assets/b201ccc5-3180-4e33-bc4a-e3cbf23cc8e1" />
+<img width="1470" height="800" alt="image" src="https://github.com/user-attachments/assets/3b6322a1-a9b9-4751-b6b6-67111698ad3a" />
+
+
 
 ## Tech Stack
 
@@ -8,7 +19,7 @@ An interactive full-stack demo for presenting REST API concepts. Users can fire 
 | ---------------- | -------------------------------------------- |
 | Backend          | FastAPI + Python                             |
 | Database         | PostgreSQL (psycopg3 + psycopg-pool, no ORM) |
-| Frontend         | React 19 + Vite + Tailwind CSS v4            |
+| Frontend         | React Javascript + Tailwind CSS v4            |
 | DB Hosting       | VPS (systemd)                                |
 | Frontend Hosting | Cloudflare Pages                             |
 

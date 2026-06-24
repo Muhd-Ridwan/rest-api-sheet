@@ -12,8 +12,7 @@ services:
       - "5431:5432"
 
   backend:
-    build:
-      context: ./backend
+    image: ridwan432/rest-api-sheet:latest
     container_name: rest-api-sheet
     restart: always
     ports:
