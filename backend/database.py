@@ -1,11 +1,21 @@
-import os
+import time
 import psycopg_pool
-from dotenv import load_dotenv
+from config import settings
 
-load_dotenv()
+pool = None
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-pool = psycopg_pool.ConnectionPool(DATABASE_URL, min_size=2, max_size=30)
+def create_pool():
+    retries = 5
+    while retries:
+        try:
+            return psycopg_pool.ConnectionPool(settings.DATABASE_URL, min_size=2, max_size=30)
+        except Exception as e:
+            retries -= 1
+            print(f"DB not ready, retrying... ({e})")
+            time.sleep(3)
+    raise Exception("Could not connect to the database")
+
+pool = create_pool()
 
 def execute_query(query: str, params: tuple = None, fetch_one: bool = False, fetch_all: bool = False, commit: bool = False):
     with pool.connection() as conn:
