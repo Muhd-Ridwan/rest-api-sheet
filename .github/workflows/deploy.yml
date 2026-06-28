@@ -60,9 +60,10 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i /tmp/vps_key "$VPS_USER@$VPS_HOST" bash << 'EOF'
             set -e
 
-            echo "--- Pulling latest code ---"
+            echo "--- Updating git history and resetting code ---"
             cd /home/rwpnt/rest-api-sheet
-            git pull origin main
+            git fetch origin main
+            git reset --hard origin/main
 
             echo "--- Pulling latest image ---"
             docker compose pull
