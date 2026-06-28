@@ -6,13 +6,6 @@ I built this because also want to learn on how to hosted it in VPS by using dock
 It's live but I stopped the backend service. Ping me if want to try it on prod.<br>
 Visit Here &rarr; ```https://racs.dev-r.org```
 
-
-<img width="1466" height="798" alt="image" src="https://github.com/user-attachments/assets/2d59f7e9-f393-43fe-97b5-28ca1de87209" />
-<img width="1469" height="803" alt="image" src="https://github.com/user-attachments/assets/b201ccc5-3180-4e33-bc4a-e3cbf23cc8e1" />
-<img width="1470" height="800" alt="image" src="https://github.com/user-attachments/assets/3b6322a1-a9b9-4751-b6b6-67111698ad3a" />
-
-
-
 ## Tech Stack
 
 | Layer            | Tech                                         |
@@ -56,7 +49,20 @@ rest-api-sheet/
 ```
 
 ---
+<p>GET Method</p>
+<img width="1469" height="803" alt="image" src="https://github.com/user-attachments/assets/b201ccc5-3180-4e33-bc4a-e3cbf23cc8e1" />
+<p>POST Method</p>
+<img width="1470" height="800" alt="image" src="https://github.com/user-attachments/assets/3b6322a1-a9b9-4751-b6b6-67111698ad3a" />
+<p>PUT Method</p>
+<img width="1223" height="892" alt="image" src="https://github.com/user-attachments/assets/4155afdd-59bf-4439-9329-0655df0914d7" />
+<p>PATCH Method</p>
+<img width="1185" height="888" alt="image" src="https://github.com/user-attachments/assets/3eb01dc5-0287-4288-bd27-c639cd0d6f3a" />
+<p>DELETE Method</p>
+<img width="1214" height="611" alt="image" src="https://github.com/user-attachments/assets/432ae24d-5e44-47ce-92df-a4df857788a4" />
 
+```
+
+```
 ## API Endpoints
 
 Base URL: `http://localhost:8000`
