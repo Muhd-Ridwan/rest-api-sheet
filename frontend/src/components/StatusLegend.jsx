@@ -1,3 +1,5 @@
+import { ChevronDown } from "lucide-react";
+
 const statuses = [
   {
     code: 200,
@@ -54,10 +56,14 @@ const codeColors = {
 
 export default function StatusLegend() {
   return (
-    <div className="border border-[#30363D] rounded-lg p-4 bg-[#161B22]">
-      <h2 className="text-sm font-bold font-mono text-[#8B949E] uppercase tracking-widest mb-3">
+    <details
+      open
+      className="border border-[#30363D] rounded-lg p-4 bg-[#161B22] group"
+    >
+      <summary className="text-sm font-bold font-mono text-[#8B949E] uppercase tracking-widest mb-3 cursor-pointer select-none list-none flex items-center justify-between">
         Status Codes
-      </h2>
+        <ChevronDown className="w-4 h-4 shrink-0 transition-transform group-open:rotate-180" />
+      </summary>
       <div className="flex flex-wrap gap-2">
         {statuses.map(({ code, label, desc }) => (
           <div
@@ -70,6 +76,6 @@ export default function StatusLegend() {
           </div>
         ))}
       </div>
-    </div>
+    </details>
   );
 }

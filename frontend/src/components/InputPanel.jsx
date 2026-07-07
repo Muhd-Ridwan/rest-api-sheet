@@ -1,3 +1,6 @@
+import { useState, useRef, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
+
 const ENDPOINTS = [
   {
     key: "GET_ALL",
@@ -71,6 +74,18 @@ export default function InputPanel({
 }) {
   const endpoint = ENDPOINTS.find((e) => e.key === selectedEndpoint);
   const color = METHOD_COLOR[endpoint.method];
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const inputClass =
     "w-full bg-[#0D1117] border border-[#30363D] rounded px-3 py-2 text-sm text-[#E6EDF3] font-mono placeholder:text-[#30363D] focus:outline-none focus:border-[#8B949E]";
@@ -78,35 +93,59 @@ export default function InputPanel({
   return (
     <div className="border border-[#30363D] rounded-lg p-4 bg-[#161B22] flex flex-col gap-4">
       {/* Endpoint selector */}
-      <div>
+      <div ref={dropdownRef} className="relative">
         <p className="text-xs font-bold text-[#8B949E] uppercase tracking-widest mb-2">
           Endpoint
         </p>
-        <div className="space-y-0.5">
-          {ENDPOINTS.map((ep) => {
-            const c = METHOD_COLOR[ep.method];
-            const active = selectedEndpoint === ep.key;
-            return (
-              <button
-                key={ep.key}
-                onClick={() => onEndpointChange(ep.key)}
-                className="w-full text-left px-3 py-2 rounded text-sm font-mono flex items-center gap-2
-  transition-colors hover:bg-white/5"
-                style={active ? { backgroundColor: `${c}15` } : {}}
-              >
-                <span
-                  className="font-bold w-16 shrink-0 text-xs"
-                  style={{ color: c }}
+        <button
+          onClick={() => setIsOpen((o) => !o)}
+          aria-expanded={isOpen}
+          className="w-full flex items-center gap-2 px-3 py-3 rounded-lg border bg-[#0D1117] transition-colors cursor-pointer"
+          style={{ borderColor: isOpen ? color : "#30363D" }}
+        >
+          <span
+            className="font-mono font-bold text-xs px-2 py-1 rounded shrink-0 w-16 text-center"
+            style={{ color, backgroundColor: `${color}20` }}
+          >
+            {endpoint.method}
+          </span>
+          <span className="font-mono text-sm text-[#E6EDF3] truncate flex-1 text-left">
+            {endpoint.path}
+          </span>
+          <ChevronDown
+            className={`w-4 h-4 shrink-0 text-[#8B949E] transition-transform ${isOpen ? "rotate-180" : ""}`}
+          />
+        </button>
+
+        {isOpen && (
+          <div className="absolute z-20 mt-1 w-full rounded-lg border border-[#30363D] bg-[#161B22] shadow-lg shadow-black/40 overflow-hidden">
+            {ENDPOINTS.map((ep) => {
+              const c = METHOD_COLOR[ep.method];
+              const active = selectedEndpoint === ep.key;
+              return (
+                <button
+                  key={ep.key}
+                  onClick={() => {
+                    onEndpointChange(ep.key);
+                    setIsOpen(false);
+                  }}
+                  className="w-full text-left px-3 py-2.5 text-sm font-mono flex items-center gap-2 transition-colors hover:bg-white/5 cursor-pointer"
+                  style={active ? { backgroundColor: `${c}15` } : {}}
                 >
-                  {ep.method}
-                </span>
-                <span style={{ color: active ? "#E6EDF3" : "#8B949E" }}>
-                  {ep.path}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+                  <span
+                    className="font-bold w-16 shrink-0 text-xs"
+                    style={{ color: c }}
+                  >
+                    {ep.method}
+                  </span>
+                  <span style={{ color: active ? "#E6EDF3" : "#8B949E" }}>
+                    {ep.path}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* Fields */}
@@ -160,17 +199,17 @@ export default function InputPanel({
       </div>
 
       {/* Buttons */}
-      <div className="flex gap-2">
+      <div className="flex flex-col-reverse sm:flex-row gap-2">
         <button
           onClick={onClear}
-          className="px-4 py-2 rounded font-bold text-sm font-mono border border-[#30363D] text-[#8B949E] hover:text-[#E6EDF3] hover:border-[#8B949E] transition-colors cursor-pointer"
+          className="px-4 py-3 sm:py-2 rounded font-bold text-sm font-mono border border-[#30363D] text-[#8B949E] hover:text-[#E6EDF3] hover:border-[#8B949E] transition-colors cursor-pointer"
         >
           Clear
         </button>
         <button
           onClick={onSend}
           disabled={loading}
-          className="flex-1 py-2 rounded font-bold text-sm font-mono transition-opacity disabled:opacity-50 cursor-pointer"
+          className="flex-1 py-3 sm:py-2 rounded font-bold text-sm font-mono transition-opacity disabled:opacity-50 cursor-pointer truncate"
           style={{ backgroundColor: color, color: "#0D1117" }}
         >
           {loading ? "Sending..." : `Send ${endpoint.method} ${endpoint.path}`}

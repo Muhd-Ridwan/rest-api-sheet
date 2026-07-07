@@ -100,17 +100,17 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0D1117] text-[#E6EDF3] font-sans p-6">
+    <div className="min-h-screen bg-[#0D1117] text-[#E6EDF3] font-sans p-4 sm:p-6">
       <div className="max-w-7xl mx-auto space-y-4">
         <div>
           <h1 className="text-xl font-bold text-[#E6EDF3]">REST API Demo</h1>
           <p className="text-sm text-[#8B949E]">Interactive CRUD explorer</p>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <DescriptionCard selectedEndpoint={selectedEndpoint} />
           <StatusLegend />
         </div>
-        <div className="grid grid-cols-[400px_1fr] gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-4">
           <InputPanel
             selectedEndpoint={selectedEndpoint}
             onEndpointChange={handleEndpointChange}
@@ -128,7 +128,7 @@ export default function App() {
               userId={userId}
               base_url={BASE_URL}
             />
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <JsonPreview method={method} formData={formData} />
               <ResultPanel
                 response={response}
